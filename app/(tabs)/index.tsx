@@ -1,12 +1,14 @@
 import { Image, StyleSheet, Platform, View, Text } from "react-native";
 import * as Speech from "expo-speech";
-import { HelloWave } from "@/components/HelloWave";
-import ParallaxScrollView from "@/components/ParallaxScrollView";
-import { ThemedText } from "@/components/ThemedText";
-import { ThemedView } from "@/components/ThemedView";
+import { HelloWave } from "@/components/template/HelloWave";
+import ParallaxScrollView from "@/components/template/ParallaxScrollView";
+import { ThemedText } from "@/components/template/ThemedText";
+import { ThemedView } from "@/components/template/ThemedView";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useEffect } from "react";
 import useSpeak from "@/hooks/useSpeak";
+import OrangeButton from "@/components/utils/OrangeButton";
+import BlueButton from "@/components/utils/BlueButton";
 
 export default function HomeScreen() {
   useEffect(() => {
@@ -18,12 +20,9 @@ export default function HomeScreen() {
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.orangeButton}>
-        <Text style={styles.text}>Test</Text>
-      </View>
-      <View style={styles.orangeButton}>
-        <Text style={styles.text}>Test</Text>
-      </View>
+      <OrangeButton label="Read Emails" action={() => console.log("Read Emails")}/>
+      <BlueButton label="Dictate Emails" action={() => console.log("Dictate Emails")}/>
+      
     </SafeAreaView>
   );
 }
@@ -42,6 +41,12 @@ const styles = StyleSheet.create({
     width: "90%",
     height: "45%",
     borderRadius: 10,
-    
+    alignItems: "center",
+    justifyContent: "center",
   },
+  blueText: {
+    color: "#22EFFC",
+    fontSize: 50,
+    fontWeight: "bold"
+  }
 });
