@@ -1,16 +1,16 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 
 type Props = {
     label: string,
     action: () => void
 }
 
-const OrangeButton = ({label}: Props) => {
+const OrangeButton = ({label, action}: Props) => {
   return (
-    <View style={styles.orangeButton}>
+    <TouchableOpacity onPress={action}  style={styles.orangeButton} >
       <Text style={styles.blueText}>{label}</Text>
-    </View>
+    </TouchableOpacity>
   );
 };
 

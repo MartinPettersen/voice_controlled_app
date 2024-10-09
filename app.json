@@ -13,13 +13,19 @@
       "backgroundColor": "#ffffff"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.anonymous.SpeectToTextApp",
+      "infoPlist": {
+        "NSSpeechRecognitionUsageDescription": "This app uses speech recognition to convert your speech to text.",
+        "NSCameraUsageDescription": "This app uses the camera to let user put a photo in his profile page."
+      }
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.yourcompany.voicecontrolledandroidapp"
     },
     "web": {
       "bundler": "metro",
@@ -27,7 +33,8 @@
       "favicon": "./assets/images/favicon.png"
     },
     "plugins": [
-      "expo-router"
+      "expo-router",
+      "@react-native-voice/voice"
     ],
     "experiments": {
       "typedRoutes": true

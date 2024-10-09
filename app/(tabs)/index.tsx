@@ -1,28 +1,24 @@
 import { Image, StyleSheet, Platform, View, Text } from "react-native";
-import * as Speech from "expo-speech";
-import { HelloWave } from "@/components/template/HelloWave";
-import ParallaxScrollView from "@/components/template/ParallaxScrollView";
-import { ThemedText } from "@/components/template/ThemedText";
-import { ThemedView } from "@/components/template/ThemedView";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useEffect } from "react";
 import useSpeak from "@/hooks/useSpeak";
 import OrangeButton from "@/components/utils/OrangeButton";
 import BlueButton from "@/components/utils/BlueButton";
 
+
 export default function HomeScreen() {
   useEffect(() => {
     const welcomeText =
       "Welcome to this app for people with vision imparement. If you want to read emails click on the upper part of the screen. If you want to dictate emails click on the bottom part of the screen";
 
+      
     useSpeak(welcomeText);
   }, []);
 
   return (
     <SafeAreaView style={styles.container}>
-      <OrangeButton label="Read Emails" action={() => console.log("Read Emails")}/>
+      <OrangeButton label="Read Emails" action={() => useSpeak("Read Emails")}/>
       <BlueButton label="Dictate Emails" action={() => console.log("Dictate Emails")}/>
-      
     </SafeAreaView>
   );
 }
