@@ -20,7 +20,7 @@ export default function HomeScreen() {
   };
 
   const navigateToDictate = () => {
-    useSpeak("Dictate Emails")
+    // useSpeak("You are now entering Dictate Emails")
     router.push('/DictateEmailsScreen');
   };
 
