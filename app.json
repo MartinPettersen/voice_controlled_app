@@ -38,6 +38,10 @@
     ],
     "experiments": {
       "typedRoutes": true
-    }
+    },
+    "permissions": [
+      "CAMERA",
+      "AUDIO_RECORDING"
+    ]
   }
 }

@@ -15,9 +15,7 @@ export default function TabLayout() {
       <Stack.Screen
         name="index"
       />
-      <Tabs.Screen
-        name="explore"
-      />
+
     </Stack>
   );
 }
