@@ -8,65 +8,44 @@ import {
 import OrangeButton from "@/components/utils/OrangeButton";
 import BlueButton from "@/components/utils/BlueButton";
 import useSpeak from "@/hooks/useSpeak";
+import useDictate from "@/hooks/useDictate";
 
 type Props = {
-    dictation: string,
-    setDictation: React.Dispatch<React.SetStateAction<string>>,
-    setShowDictateCurrent: React.Dispatch<React.SetStateAction<boolean>>,
-    setShowDictateNext: React.Dispatch<React.SetStateAction<boolean>>,
-    voiceMessage: string
-}
+  dictation: string;
+  setDictation: React.Dispatch<React.SetStateAction<string>>;
+  setShowDictateCurrent: React.Dispatch<React.SetStateAction<boolean>>;
+  setShowDictateNext: React.Dispatch<React.SetStateAction<boolean>>;
+  voiceMessage: string;
+};
 
-const Dictate = ({dictation, setDictation, setShowDictateCurrent, setShowDictateNext, voiceMessage}: Props) => {
+const Dictate = ({
+  dictation,
+  setDictation,
+  setShowDictateCurrent,
+  setShowDictateNext,
+  voiceMessage,
+}: Props) => {
   const [recognizingSpeech, setRecognizingSpeech] = useState(false);
-  // const [dictation, setDictation] = useState("");
-
-  useSpeechRecognitionEvent("start", () => setRecognizingSpeech(true));
-  useSpeechRecognitionEvent("end", () => setRecognizingSpeech(false));
-  useSpeechRecognitionEvent("result", (event) => {
-    // replace ' at ' med @
-    // fjerne mellmorom
-
-    const transcript = event.results[0]?.transcript;
-    const newTranscript = transcript.replace(" at ", "@");
-    setDictation(newTranscript);
-  });
-  useSpeechRecognitionEvent("error", (event) => {
-    console.log("error", event.error, "error ", event.message);
-  });
-
-  const handleStart = async () => {
-    const result = await ExpoSpeechRecognitionModule.requestPermissionsAsync();
-    if(!result.granted) {
-        console.log("need permission to use microphone", result)
-        return;
-    }
-    ExpoSpeechRecognitionModule.start({
-        lang: "en-US",
-        interimResults: true,
-        maxAlternatives: 1,
-        continuous: false,
-        requiresOnDeviceRecognition: false,
-        addsPunctuation: false,
-        contextualStrings: ["Carlsen", "Nepomniachtchi", "Praggnanandhaa"],
-      });
-  }
 
   const handleFinish = () => {
-    setShowDictateCurrent(false)
-    setShowDictateNext(true)
-  }
+    setShowDictateCurrent(false);
+    setShowDictateNext(true);
+  };
 
   useEffect(() => {
-    useSpeak(voiceMessage)
-  },[])
+    useSpeak(voiceMessage);
+  }, []);
 
   useEffect(() => {
     if (!recognizingSpeech && dictation !== "") {
-      const response = `you dictated: ${dictation}, if this is not correct, you can try again by pushing at the bottom of the screen`
-      useSpeak(response)
+      const response = `you dictated: ${dictation}, if this is not correct, you can try again by pushing at the bottom of the screen`;
+      useSpeak(response);
     }
-  },[recognizingSpeech])
+  }, [recognizingSpeech]);
+
+  const handleStart2 = () => {
+    useDictate(setDictation, setRecognizingSpeech)
+  }
 
   return (
     <View>
@@ -77,11 +56,10 @@ const Dictate = ({dictation, setDictation, setShowDictateCurrent, setShowDictate
           <Text style={styles.text}>{dictation}</Text>
         </View>
         {!recognizingSpeech ? (
-        <BlueButton label="Start" action={handleStart} />
-
-    ) : (
-        <BlueButton label="Stop" action={ExpoSpeechRecognitionModule.stop} />
-      )}
+          <BlueButton label="Start" action={handleStart2} />
+        ) : (
+          <BlueButton label="Stop" action={ExpoSpeechRecognitionModule.stop} />
+        )}
       </ScrollView>
     </View>
   );
@@ -103,8 +81,7 @@ const styles = StyleSheet.create({
   text: {
     fontWeight: "bold",
     fontSize: 20,
-  }
+  },
 });
-
 
 export default Dictate;
