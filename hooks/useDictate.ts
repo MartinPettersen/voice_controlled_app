@@ -41,7 +41,7 @@ const useDictate = ( setDictation: React.Dispatch<React.SetStateAction<string>>,
         });
     };
 
-    handleStart();
+    return {handleStart};
 }
 
 export default useDictate

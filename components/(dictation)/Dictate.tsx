@@ -43,9 +43,7 @@ const Dictate = ({
     }
   }, [recognizingSpeech]);
 
-  const handleStart2 = () => {
-    useDictate(setDictation, setRecognizingSpeech)
-  }
+  const { handleStart } = useDictate(setDictation, setRecognizingSpeech);
 
   return (
     <View>
@@ -56,7 +54,7 @@ const Dictate = ({
           <Text style={styles.text}>{dictation}</Text>
         </View>
         {!recognizingSpeech ? (
-          <BlueButton label="Start" action={handleStart2} />
+          <BlueButton label="Start" action={handleStart} />
         ) : (
           <BlueButton label="Stop" action={ExpoSpeechRecognitionModule.stop} />
         )}
