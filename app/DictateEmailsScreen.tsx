@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { View, Text, Button, ScrollView, StyleSheet } from "react-native";
 //https://www.npmjs.com/package/expo-speech-recognition
+import Dictate from "@/components/(dictation)/Dictate";
 import {
   ExpoSpeechRecognitionModule,
   useSpeechRecognitionEvent,
 } from "expo-speech-recognition";
 import OrangeButton from "@/components/utils/OrangeButton";
 import BlueButton from "@/components/utils/BlueButton";
-import Dictate from "@/components/(dictation)/Dictate";
-import DictateEmail from "@/components/(dictation)/DictateEmail";
 import useSpeak from "@/hooks/useSpeak";
 
 const DictateEmailsScreen = () => {
@@ -25,7 +24,7 @@ const DictateEmailsScreen = () => {
   return (
     <View>
       {showDictateEmail? 
-        <DictateEmail dictation={email} setDictation={setEmail} setShowDictateEmail={setShowDictateEmail} setShowDictateSubject={setShowDictateSubject}/>
+        <Dictate dictation={email} setDictation={setEmail} setShowDictateCurrent={setShowDictateEmail} setShowDictateNext={setShowDictateSubject} voiceMessage="To start dictating the recievers email, push at the bottom half of the screen. say the email address. When you are done push on the top part of the screen."/>
       : null}
       {showDictateSubject? 
         <Dictate dictation={subject} setDictation={setSubject} setShowDictateCurrent={setShowDictateSubject} setShowDictateNext={setShowDictateContent} voiceMessage="To start dictating the email subject, push at the bottom half of the screen. say the email subject . When you are done push on the top part of the screen."/>
