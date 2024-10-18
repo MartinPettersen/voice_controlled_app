@@ -5,9 +5,20 @@ import useSpeak from "@/hooks/useSpeak";
 import OrangeButton from "@/components/utils/OrangeButton";
 import BlueButton from "@/components/utils/BlueButton";
 import { router } from "expo-router";
+import { addNote, createTables, getAllNotes } from "@/database/database";
 
 
 export default function HomeScreen() {
+
+  (async () => {
+    await createTables();
+    
+    const d = new Date();
+    await addNote(d.toISOString(), "Test note", "This is a test note");
+    
+    const allNotes = await getAllNotes();
+    console.log("all notes", allNotes);
+})();
   useEffect(() => {
     const welcomeText =
       "Welcome to this app for people with vision imparement. If you want to read emails click on the upper part of the screen. If you want to dictate emails click on the bottom part of the screen";

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { View, Text, Button, ScrollView, StyleSheet } from "react-native";
 //https://www.npmjs.com/package/expo-speech-recognition
+// adb emu avd hostmicon
 import Dictate from "@/components/(dictation)/Dictate";
 import {
   ExpoSpeechRecognitionModule,
