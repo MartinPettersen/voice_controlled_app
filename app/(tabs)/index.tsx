@@ -5,17 +5,24 @@ import useSpeak from "@/hooks/useSpeak";
 import OrangeButton from "@/components/utils/OrangeButton";
 import BlueButton from "@/components/utils/BlueButton";
 import { router } from "expo-router";
-import { addNote, createTables, getAllNotes } from "@/database/database";
+import { addNote, createTables, deleteNote, getAllNotes, updateContent, updateSubject } from "@/database/database";
 
 
 export default function HomeScreen() {
 
   (async () => {
-    await createTables();
+   // await createTables();
     
     const d = new Date();
     await addNote(d.toISOString(), "Test note", "This is a test note");
+    await updateSubject (43, "Updated note");
+    await updateContent (43,  "This is a updated note");
     
+    //for (let i = 0; i < 45; i++) {
+      
+    //  await deleteNote(i)
+    //}
+
     const allNotes = await getAllNotes();
     console.log("all notes", allNotes);
 })();

@@ -26,12 +26,27 @@ export const getAllNotes = async () => {
     return allRows
 }
 
-/*
 
-export const getBook = async (isbn: number) => {
-    const allRows: BookMark[] = await db.getAllAsync('SELECT * FROM books WHERE isbn = $isbn', { $isbn: isbn });
+export const getNotes = async (id: number) => {
+    const allRows: any[] = await db.getAllAsync('SELECT * FROM notes WHERE id = $id', { $id: id });
     return allRows
 }
+
+
+export const deleteNote = async (id: number) => {
+    await db.runAsync('DELETE FROM notes WHERE id = $id', { $id: id });
+}
+
+
+export const updateSubject = async (id: number, subject: string) => {
+    await db.runAsync('UPDATE notes SET subject = ? WHERE id = ?', [subject, id])
+}
+
+
+export const updateContent = async (id: number, content: string) => {
+    await db.runAsync('UPDATE notes SET content = ? WHERE id = ?', [content, id])
+}
+/*
 
 export const checkForDeletion = async (id: number) => {
     const allRows: BookMark[] = await db.getAllAsync('SELECT * FROM books WHERE id = $id AND owned = $owned AND read = $read AND want = $want', {$id: id, $owned: false, $read: false, $want: false });
@@ -41,28 +56,8 @@ export const checkForDeletion = async (id: number) => {
     return allRows
 }
 
-export const getOwnedBooks = async () => {
-    const allRows: BookMark[] = await db.getAllAsync('SELECT * FROM books WHERE owned = $owned', { $owned: true });
-    return allRows
-}
-export const getReadBooks = async () => {
-    const allRows: BookMark[] = await db.getAllAsync('SELECT * FROM books WHERE read = $read', { $read: true });
-    return allRows
-}
 
-export const getWishlistedBooks = async () => {
-    const allRows: BookMark[] = await db.getAllAsync('SELECT * FROM books WHERE want = $want', { $want: true });
-    return allRows
-}
 
-export const deleteBook = async (id: number) => {
-    await db.runAsync('DELETE FROM books WHERE id = $id', { $id: id });
-}
-
-export const updateBookOwnership = async (id: number, owned: boolean) => {
-    await db.runAsync('UPDATE books SET owned = ? WHERE id = ?', [owned, id])
-    checkForDeletion(id)
-}
 
 export const updateBookRead = async (id: number, read: boolean) => {
     await db.runAsync('UPDATE books SET read = ? WHERE id = ?', [read, id])
