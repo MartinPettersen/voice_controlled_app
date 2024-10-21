@@ -10,42 +10,26 @@ import { addNote, createTables, deleteNote, getAllNotes, updateContent, updateSu
 
 export default function HomeScreen() {
 
-  (async () => {
-   // await createTables();
-    
-    const d = new Date();
-    await addNote(d.toISOString(), "Test note", "This is a test note");
-    await updateSubject (43, "Updated note");
-    await updateContent (43,  "This is a updated note");
-    
-    //for (let i = 0; i < 45; i++) {
-      
-    //  await deleteNote(i)
-    //}
-
-    const allNotes = await getAllNotes();
-    console.log("all notes", allNotes);
-})();
   useEffect(() => {
     const welcomeText =
-      "Welcome to this app for people with vision imparement. If you want to read emails click on the upper part of the screen. If you want to dictate emails click on the bottom part of the screen";
+      "Welcome to this Note taking app for people with vision imparement. If you want to read note's click on the upper part of the screen. If you want to dictate a note click on the bottom part of the screen";
     useSpeak(welcomeText);
   }, []);
 
   const navigateToRead = () => {
-    useSpeak("Read Emails")
+    useSpeak("Read Notes")
     router.push('/ReadScreen');
   };
 
   const navigateToDictate = () => {
-    // useSpeak("You are now entering Dictate Emails")
-    router.push('/DictateEmailsScreen');
+    // useSpeak("You are now entering Dictate Notes")
+    router.push('/DictateNoteScreen');
   };
 
   return (
     <SafeAreaView style={styles.container}>
-      <OrangeButton label="Read Emails" action={() => navigateToRead()}/>
-      <BlueButton label="Dictate Emails" action={() => navigateToDictate()}/>
+      <OrangeButton label="Read Notes" action={() => navigateToRead()}/>
+      <BlueButton label="Dictate Note" action={() => navigateToDictate()}/>
     </SafeAreaView>
   );
 }

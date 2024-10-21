@@ -38,7 +38,7 @@ export default function RootLayout() {
         <Stack.Screen name="index" options={{ headerShown: false }} />
         <Stack.Screen name="+not-found" />
         <Stack.Screen name="ReadScreen"/>
-        <Stack.Screen name="DictateEmailsScreen"/>
+        <Stack.Screen name="DictateNoteScreen"/>
       </Stack>
     </ThemeProvider>
   );
