@@ -31,7 +31,7 @@ const ReadScreen = () => {
   const handleNoteSelection = (noteId: string) => {
     router.push({
       pathname: "/NoteScreen",
-      params: { noteid: noteId }
+      params: { noteid: noteId.toString() }
     });
   };
 

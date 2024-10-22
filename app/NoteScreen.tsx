@@ -10,18 +10,19 @@ import { useLocalSearchParams } from "expo-router";
 
 const NoteScreen = () => {
   const { noteid } = useLocalSearchParams();
-  const [allNotes, setAllNotes] = useState<any>([]);
+  console.log("noteid", noteid)
+  const [note, setNote] = useState<any | null>(null);
   const [selectedNote, setSelectedNote] = useState<any>([]);
 
   useEffect(() => {
     (async () => {
-      const notes = await getAllNotes();
-      setAllNotes(notes);
-      console.log("all notes", notes);
+      const note = await getNote(parseInt(noteid[0]));
+      setNote(note[0]);
+      console.log("note", note);
     })();
 
     const welcomeText =
-      "To return to main menu push at the top of the screen. To read a specific note push the note";
+      "To return to main menu push at the top of the screen.";
     useSpeak(welcomeText);
   }, []);
 
@@ -30,29 +31,26 @@ const NoteScreen = () => {
   };
 
   useEffect(() => {
-    if (allNotes.length > 0) {
-      for (let i = 0; i < allNotes.length; i++) {
-        useSpeak(`${allNotes[i].id} ${allNotes[i].subject}`);
-      }
+    if (note) {
+        useSpeak(`${note.id} ${note.subject} ${note.content}`);
     }
-  }, [allNotes]);
+  }, [note]);
 
   return (
     <View style={styles.container}>
       <OrangeButton label="Done" action={() => handleFinish()} />
 
-      <Text>{noteid}</Text>
-
       <ScrollView
         contentContainerStyle={styles.noteContainer}
         style={styles.scrollView}
       >
-        {allNotes.length > 0
-          ? allNotes.map((note: any) => (
+        {note
+          ? 
+          
               <View style={styles.noteCard}>
-                <Text style={styles.text}>{note.subject}</Text>
+                <Text style={styles.text}>{note.content}</Text>
               </View>
-            ))
+          
           : null}
       </ScrollView>
     </View>
