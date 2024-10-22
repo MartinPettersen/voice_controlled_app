@@ -43,7 +43,7 @@ const Dictate = ({
     }
   }, [recognizingSpeech]);
 
-  const { handleStart } = useDictate(setDictation, setRecognizingSpeech);
+  const { handleStart } = useDictate(setDictation, setRecognizingSpeech, dictation);
 
   return (
     <View>

@@ -6,10 +6,11 @@ import {
 type Props = {
     recognizingSpeech: boolean;
     setRecognizingSpeech: React.Dispatch<React.SetStateAction<boolean>>;
+    dictation: string;
     setDictation: React.Dispatch<React.SetStateAction<string>>;
 }
 
-const useDictate = ( setDictation: React.Dispatch<React.SetStateAction<string>>,setRecognizingSpeech: React.Dispatch<React.SetStateAction<boolean>>) => {
+const useDictate = ( setDictation: React.Dispatch<React.SetStateAction<string>>,setRecognizingSpeech: React.Dispatch<React.SetStateAction<boolean>>, dictation: string) => {
 
 
     useSpeechRecognitionEvent("start", () => setRecognizingSpeech(true));
@@ -18,7 +19,7 @@ const useDictate = ( setDictation: React.Dispatch<React.SetStateAction<string>>,
         // replace ' at ' med @
         const transcript = event.results[0]?.transcript;
         const newTranscript = transcript.replace(" at ", "@");
-        setDictation(newTranscript);
+        setDictation(dictation + newTranscript);
     });
     useSpeechRecognitionEvent("error", (event) => {
         console.log("error", event.error, "error ", event.message);
@@ -34,7 +35,7 @@ const useDictate = ( setDictation: React.Dispatch<React.SetStateAction<string>>,
             lang: "en-US",
             interimResults: true,
             maxAlternatives: 1,
-            continuous: false,
+            continuous: true,
             requiresOnDeviceRecognition: false,
             addsPunctuation: false,
             contextualStrings: ["Carlsen", "Nepomniachtchi", "Praggnanandhaa"],
