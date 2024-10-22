@@ -36,9 +36,10 @@ export default function RootLayout() {
       <Stack>
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
         <Stack.Screen name="index" options={{ headerShown: false }} />
-        <Stack.Screen name="+not-found" />
-        <Stack.Screen name="ReadScreen"/>
-        <Stack.Screen name="DictateNoteScreen"/>
+        <Stack.Screen name="+not-found" options={{ headerShown: false }} />
+        <Stack.Screen name="ReadScreen" options={{ headerShown: false }} />
+        <Stack.Screen name="NoteScreen" options={{ headerShown: false }} />
+        <Stack.Screen name="DictateNoteScreen" options={{ headerShown: false }} />
       </Stack>
     </ThemeProvider>
   );

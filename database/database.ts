@@ -27,7 +27,7 @@ export const getAllNotes = async () => {
 }
 
 
-export const getNotes = async (id: number) => {
+export const getNote = async (id: number) => {
     const allRows: any[] = await db.getAllAsync('SELECT * FROM notes WHERE id = $id', { $id: id });
     return allRows
 }

@@ -14,8 +14,7 @@ const OrangeButton = ({label, action}: Props) => {
   );
 };
 
-const styles = StyleSheet.create({
-    
+const styles = StyleSheet.create({  
   button: {
     backgroundColor: "#22EFFC",
     width: "90%",

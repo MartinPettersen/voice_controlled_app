@@ -5,10 +5,11 @@ import { getAllNotes, getNote } from "@/database/database";
 import useSpeak from "@/hooks/useSpeak";
 import { router } from "expo-router";
 import React, { useEffect, useState } from "react";
-import { View, Text, SafeAreaView, StyleSheet, ScrollView, TouchableOpacity } from "react-native";
+import { View, Text, SafeAreaView, StyleSheet, ScrollView } from "react-native";
+import { useLocalSearchParams } from "expo-router";
 
-const ReadScreen = () => {
-  const [indexer, setIndexer] = useState("");
+const NoteScreen = () => {
+  const { noteid } = useLocalSearchParams();
   const [allNotes, setAllNotes] = useState<any>([]);
   const [selectedNote, setSelectedNote] = useState<any>([]);
 
@@ -28,13 +29,6 @@ const ReadScreen = () => {
     router.push("/");
   };
 
-  const handleNoteSelection = (noteId: string) => {
-    router.push({
-      pathname: "/NoteScreen",
-      params: { noteid: noteId }
-    });
-  };
-
   useEffect(() => {
     if (allNotes.length > 0) {
       for (let i = 0; i < allNotes.length; i++) {
@@ -47,15 +41,17 @@ const ReadScreen = () => {
     <View style={styles.container}>
       <OrangeButton label="Done" action={() => handleFinish()} />
 
+      <Text>{noteid}</Text>
+
       <ScrollView
         contentContainerStyle={styles.noteContainer}
         style={styles.scrollView}
       >
         {allNotes.length > 0
           ? allNotes.map((note: any) => (
-              <TouchableOpacity key={note.id} style={styles.noteCard} onPress={() => handleNoteSelection(note.id)}>
+              <View style={styles.noteCard}>
                 <Text style={styles.text}>{note.subject}</Text>
-              </TouchableOpacity>
+              </View>
             ))
           : null}
       </ScrollView>
@@ -93,4 +89,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ReadScreen;
+export default NoteScreen;
