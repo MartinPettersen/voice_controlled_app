@@ -3,13 +3,6 @@ import {
     useSpeechRecognitionEvent,
 } from "expo-speech-recognition";
 
-type Props = {
-    recognizingSpeech: boolean;
-    setRecognizingSpeech: React.Dispatch<React.SetStateAction<boolean>>;
-    dictation: string;
-    setDictation: React.Dispatch<React.SetStateAction<string>>;
-}
-
 const useDictate = ( setDictation: React.Dispatch<React.SetStateAction<string>>,setRecognizingSpeech: React.Dispatch<React.SetStateAction<boolean>>, dictation: string) => {
 
 

@@ -8,11 +8,12 @@ import React, { useEffect, useState } from "react";
 import { View, Text, SafeAreaView, StyleSheet, ScrollView } from "react-native";
 import { useLocalSearchParams } from "expo-router";
 
+
 const NoteScreen = () => {
   const { noteid } = useLocalSearchParams();
   console.log("noteid", noteid)
-  const [note, setNote] = useState<any | null>(null);
-  const [selectedNote, setSelectedNote] = useState<any>([]);
+  const [note, setNote] = useState<Note | null>(null);
+  const [selectedNote, setSelectedNote] = useState<Note[]>([]);
 
   useEffect(() => {
     (async () => {

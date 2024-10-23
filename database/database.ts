@@ -21,14 +21,14 @@ export const addNote = async (date: string, subject: string, content: string) =>
 }
 
 export const getAllNotes = async () => {
-    const allRows: any[] = await db.getAllAsync('SELECT * FROM notes');
+    const allRows: Note[] = await db.getAllAsync('SELECT * FROM notes');
 
     return allRows
 }
 
 
 export const getNote = async (id: number) => {
-    const allRows: any[] = await db.getAllAsync('SELECT * FROM notes WHERE id = $id', { $id: id });
+    const allRows: Note[] = await db.getAllAsync('SELECT * FROM notes WHERE id = $id', { $id: id });
     return allRows
 }
 

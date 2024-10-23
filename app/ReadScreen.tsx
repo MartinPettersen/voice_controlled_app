@@ -9,8 +9,8 @@ import { View, Text, SafeAreaView, StyleSheet, ScrollView, TouchableOpacity } fr
 
 const ReadScreen = () => {
   const [indexer, setIndexer] = useState("");
-  const [allNotes, setAllNotes] = useState<any>([]);
-  const [selectedNote, setSelectedNote] = useState<any>([]);
+  const [allNotes, setAllNotes] = useState<Note[]>([]);
+  const [selectedNote, setSelectedNote] = useState<Note[]>([]);
 
   useEffect(() => {
     (async () => {
@@ -52,7 +52,7 @@ const ReadScreen = () => {
         style={styles.scrollView}
       >
         {allNotes.length > 0
-          ? allNotes.map((note: any) => (
+          ? allNotes.map((note: Note) => (
               <TouchableOpacity key={note.id} style={styles.noteCard} onPress={() => handleNoteSelection(note.id)}>
                 <Text style={styles.text}>{note.subject}</Text>
               </TouchableOpacity>
